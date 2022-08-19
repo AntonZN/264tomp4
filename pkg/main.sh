@@ -57,9 +57,9 @@ if [ "$isAudio" -eq "1" ]; then
   #$ffmpegPatch -i input.mkv -c:v copy -c:a copy -strict -1 output.mp4
 else
   ./mkvmerge  --output "input.mkv" --timestamps "0:input.video.ts.txt" "input.h264"
-  $ffmpegPatch -i input.mkv -c:v copy -an output.mp4
+  #$ffmpegPatch -i input.mkv -c:v copy -an output.mp4
 fi
 
-
+chmod 644 input.mkv
 mv input.mkv ${outputPatch}
 rm -rf $tmpDir
