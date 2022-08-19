@@ -45,14 +45,14 @@ cd $tmpDir
 
 ls -lh
 
-./convert2 input.264
+../convert2 input.264
 
 if [ "$isAudio" -eq "1" ]; then
   $ffmpegPatch input.mp3 -i input.wav
-  ./mkvmerge  --output "input.mkv" --timestamps "0:input.video.ts.txt" "input.h264" "input.mp3"
+  ../mkvmerge  --output "input.mkv" --timestamps "0:input.video.ts.txt" "input.h264" "input.mp3"
   $ffmpegPatch -i input.mkv -c:v copy -c:a copy -strict -1 output.mp4
 else
-  ./mkvmerge  --output "input.mkv" --timestamps "0:input.video.ts.txt" "input.h264"
+  ../mkvmerge  --output "input.mkv" --timestamps "0:input.video.ts.txt" "input.h264"
   $ffmpegPatch -i input.mkv -c:v copy -an output.mp4
 fi
 
