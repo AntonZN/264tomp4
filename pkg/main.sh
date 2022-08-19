@@ -53,10 +53,10 @@ ls -lh
 
 if [ "$isAudio" -eq "1" ]; then
   $ffmpegPatch input.mp3 -i input.wav
-  ./mkvmerge  --appimage-extract --output "test.mkv" --timestamps "0:test.video.ts.txt" "test.h264" "test.mp3"
+  ./mkvmerge --output "test.mkv" --timestamps "0:test.video.ts.txt" "test.h264" "test.mp3"
   $ffmpegPatch -i input.mkv -c:v copy -c:a copy -strict -1 output.mp4
 else
-  ./mkvmerge  --appimage-extract --output "input.mkv" --timestamps "0:input.video.ts.txt" "input.h264"
+  ./mkvmerge --output "input.mkv" --timestamps "0:input.video.ts.txt" "input.h264"
   $ffmpegPatch -i input.mkv -c:v copy -an output.mp4
 fi
 
