@@ -24,12 +24,12 @@ if [ -z "$ffmpegPatch" ];then
 fi
 
 if [ -z "$outputPatch" ];then
-  echo "Usage ffmpegPatch: converter file.264 /tmp_stream /usr/bin/ffmpeg4 output.mp4"
+  echo "Usage ffmpegPatch: converter file.264 /tmp_stream /usr/bin/ffmpeg4 output.mkv"
   exit 1
 fi
 
 if [ -z "$isAudio" ];then
-  echo "Usage ffmpegPatch: converter file.264 /tmp_stream /usr/bin/ffmpeg4 output.mp4 1/0"
+  echo "Usage ffmpegPatch: converter file.264 /tmp_stream /usr/bin/ffmpeg4 output.mkv 1/0"
   exit 1
 fi
 
@@ -53,13 +53,13 @@ ls -lh
 
 if [ "$isAudio" -eq "1" ]; then
   $ffmpegPatch input.mp3 -i input.wav
-  ./mkvmerge  --output "input.mkv" --timestamps "0:input.video.ts.txt" "input.h264" "input.mp3"
-  #$ffmpegPatch -i input.mkv -c:v copy -c:a copy -strict -1 output.mp4
+  ./mkvmerge  --output "output.mkv" --timestamps "0:input.video.ts.txt" "input.h264" "input.mp3"
+  # $ffmpegPatch -i input.mkv -c:v copy -c:a copy -strict -1 output.mkv
 else
-  ./mkvmerge  --output "input.mkv" --timestamps "0:input.video.ts.txt" "input.h264"
-  #$ffmpegPatch -i input.mkv -c:v copy -an output.mp4
+  ./mkvmerge  --output "output.mkv" --timestamps "0:input.video.ts.txt" "input.h264"
+  # $ffmpegPatch -i input.mkv -c:v copy -an output.mkv
 fi
 
-chmod 644 input.mkv
-mv input.mkv ${outputPatch}
+chmod 644 output.mkv
+mv output.mkv ${outputPatch}
 rm -rf $tmpDir
