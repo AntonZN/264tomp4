@@ -52,12 +52,12 @@ ls -lh
 ./convert2 input.264
 
 if [ "$isAudio" -eq "1" ]; then
-  $ffmpegPatch input.mp3 -i input.wav
+  $ffmpegPatch input.mp3 -hide_banner -loglevel panic -i input.wav
   ./mkvmerge  --output "output.mkv" --timestamps "0:input.video.ts.txt" "input.h264" "input.mp3"
-  # $ffmpegPatch -i input.mkv -c:v copy -c:a copy -strict -1 output.mkv
+  # $ffmpegPatch -hide_banner -loglevel panic -i input.mkv -c:v copy -c:a copy -strict -1 output.mkv
 else
   ./mkvmerge  --output "output.mkv" --timestamps "0:input.video.ts.txt" "input.h264"
-  # $ffmpegPatch -i input.mkv -c:v copy -an output.mkv
+  # $ffmpegPatch -hide_banner -loglevel panic -i input.mkv -c:v copy -an output.mkv
 fi
 
 chmod 644 output.mkv
